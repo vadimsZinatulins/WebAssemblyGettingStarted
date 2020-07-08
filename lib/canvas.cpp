@@ -1,7 +1,7 @@
-#include <iostream>
 #include <stdlib.h>
 #include <time.h>
 #include <emscripten.h>
+#include <vector>
 
 #include "Circle.h"
 #include "CircleAnimation.h"
@@ -10,13 +10,16 @@
 // Number of circles
 #define NUM_CIRCLES 20
 
-struct Circle circles[NUM_CIRCLES];
-struct CircleAnimation animationData[NUM_CIRCLES];
+std::vector<Circle> circles;
+std::vector<CircleAnimation> animationData;
 
 extern "C" int main(int argc, char *argv[])
 {
     // Seed random number generator
     srand(time(nullptr));
+
+    circles.resize(NUM_CIRCLES);
+    animationData.resize(NUM_CIRCLES);
 
     // Create circles
     for (int i = 0; i < NUM_CIRCLES; i++)
@@ -60,5 +63,5 @@ extern "C" struct Circle *getCircles(int canvasWidth, int canvasHeight)
         circles[i].y += animationData[i].dy;
     }
     
-    return circles;
+    return circles.data();
 }
