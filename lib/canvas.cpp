@@ -3,34 +3,15 @@
 #include <time.h>
 #include <emscripten.h>
 
+#include "Circle.h"
+#include "CircleAnimation.h"
+#include "auxFunctions.h"
+
 // Number of circles
 #define NUM_CIRCLES 20
 
-struct Circle
-{
-    int x; // X coordinate
-    int y; // Y coordinate
-    int r; // Radius
-
-    int cr; // Red color
-    int cg; // Green color
-    int cb; // Blue color
-};
-
-struct CircleAnimation
-{
-    int dx; // X velocity
-    int dy; // Y velocity
-};
-
 struct Circle circles[NUM_CIRCLES];
 struct CircleAnimation animationData[NUM_CIRCLES];
-
-// Generates random number that is less than max value
-int getRand(int max)
-{
-    return (rand() % max);
-}
 
 extern "C" int main(int argc, char *argv[])
 {
