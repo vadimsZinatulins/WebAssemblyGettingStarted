@@ -4,7 +4,7 @@
 #include <emscripten.h>
 
 // Number of circles
-#define NUM_CIRCLES 500
+#define NUM_CIRCLES 20
 
 struct Circle
 {
@@ -19,10 +19,6 @@ struct Circle
 
 struct CircleAnimation
 {
-    int x; // X coordinate
-    int y; // Y coordinate
-    int r; // Radius
-
     int dx; // X velocity
     int dy; // Y velocity
 };
@@ -57,9 +53,6 @@ extern "C" int main(int argc, char *argv[])
         circles[i].cb = getRand(255);
         circles[i].cg = getRand(255);
 
-        animationData[i].x = x;
-        animationData[i].y = y;
-        animationData[i].r = radius;
         animationData[i].dx = getRand(20) - 10;
         animationData[i].dy = getRand(20) - 10;
     }
@@ -77,17 +70,13 @@ extern "C" struct Circle *getCircles(int canvasWidth, int canvasHeight)
     for (int i = 0; i < NUM_CIRCLES; i++)
     {
         // Check if circle is at canvas horizontal boundaries, if so then invert its x velocity
-        if(animationData[i].x + animationData[i].r >= canvasWidth || animationData[i].x - animationData[i].r <= 0) animationData[i].dx *= -1;
+        if(circles[i].x + circles[i].r >= canvasWidth || circles[i].x - circles[i].r <= 0) animationData[i].dx *= -1;
         // Check if circle is at canvas vertical boundaries, if so then invert its y velocity
-        if(animationData[i].y + animationData[i].r >= canvasHeight || animationData[i].y - animationData[i].r <= 0) animationData[i].dy *= -1;
-
-        // Update animation data position
-        animationData[i].x += animationData[i].dx;
-        animationData[i].y += animationData[i].dy;
+        if(circles[i].y + circles[i].r >= canvasHeight || circles[i].y - circles[i].r <= 0) animationData[i].dy *= -1;
 
         // Update circle position
-        circles[i].x = animationData[i].x;
-        circles[i].y = animationData[i].y;
+        circles[i].x += animationData[i].dx;
+        circles[i].y += animationData[i].dy;
     }
     
     return circles;
