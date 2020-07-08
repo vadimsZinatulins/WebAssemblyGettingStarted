@@ -1,0 +1,14 @@
+{
+  "name": "learnwasm",
+  "version": "1.0.0",
+  "description": "Beginners guide to WebAssembly",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Vadims Zinatulins <vadimz2@hotmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
