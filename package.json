@@ -9,6 +9,6 @@
   "author": "Vadims Zinatulins <vadimz2@hotmail.com>",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.3"
   }
 }
